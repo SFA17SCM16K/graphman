@@ -1,0 +1,33 @@
+.req-params{
+  color:black;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.well{
+
+  align-self: center;
+  margin:auto !important;
+  margin-top:50px !important;
+  width:90%
+}
+
+.header-h1 {
+  align-self: flex-start !important;
+  margin-top:0px !important;
+}
+.params{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.req-param{
+  align-self:center !important;
+  margin:3px;
+}
+
+.hit{
+  margin-top:20px !important;
+  width:80%
+}
