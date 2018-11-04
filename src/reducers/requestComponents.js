@@ -79,7 +79,7 @@ export default (initialData) => (state = {
           data : state.data.map( (item,i) => {
 
             if(i == item_id){
-              if(item.item.request.method == "GET"){
+              if(item.item.request.method == "GET" || item.item.request.method == "DELETE" ){
                 item.item.request.url.query[id_].value = value;
 
               }else{

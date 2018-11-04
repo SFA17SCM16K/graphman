@@ -48,10 +48,11 @@ class RequestComponent extends Component{
           "method" : "",
           "url": {
             "raw" : "",
-            "protocol" : "http",
+            "protocol" : "",
             "host": [],
             "port": "",
-            "query":[]
+            "query":[],
+            "path" : []
 
           },
           "body":{
@@ -82,11 +83,46 @@ class RequestComponent extends Component{
   urlChange = (e,data) => {
     const { value } = data;
     this.data.url = value;
-    var port = value.split(":");
-    var host = port[0];
-    port = port[1];
-    this.data.item.request["url"]["host"][0] = host;
-    this.data.item.request["url"]["port"] = port;
+    var parts = value.split("/");
+    var protocol = parts[0].substring(0, parts[0].length-1);
+    var host = parts[2].split(':');
+    var hostP = host[0].split('.');
+
+    var port = host[1] != undefined ? host[1] : "";
+
+    for(var  i = 3; i < parts.length; i++){
+      if(parts[i].includes("?")){
+        parts[i] = parts[i].split('?')[0];
+      }
+
+      this.data.item.request["url"]["path"].push(parts[i]);
+    }
+
+
+    var x = `?`+value.split('?')[1]
+    var urlParams = new URLSearchParams(x);
+
+    var entries = urlParams.entries();
+    for(let pair of entries) {
+      var obj = {
+        "key": pair[0],
+        "value" : pair[1]
+
+      }
+      this.data.item.request["url"]["query"].push(obj);
+    }
+
+
+
+
+
+
+
+    this.data.item.request["url"]["protocol"] = protocol;
+    this.data.item.request["url"]["host"].push(hostP[0]);
+    this.data.item.request["url"]["host"].push(hostP[1]);
+
+    this.data.item.request["url"]["port"] = "";
     this.data.item.request["url"]["raw"] = value;
 
     this.props.changeUrl(this.data);
