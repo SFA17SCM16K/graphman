@@ -95,3 +95,18 @@ export function setCode(params){
     payload :  params
   }
 }
+
+export function cloudApi(params) {
+  console.log(params)
+  const url = "http://localhost:4000/submit";
+
+  const fetchDatas = () => fetch(url, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body:JSON.stringify(params),
+  }).then(res => res.json());
+
+  return fetchDatas();
+}

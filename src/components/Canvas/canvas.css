@@ -29,3 +29,11 @@
   align-content: space-around;
   height:50px;
 }
+.req-big{
+  align-self: center;
+  color: white !important;
+  margin-top :10px !important;
+  margin-left:50px !important;
+  align-items: flex-end;
+  background-color: #00a8ff !important;
+}
