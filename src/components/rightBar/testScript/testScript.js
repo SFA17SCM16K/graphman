@@ -34,7 +34,7 @@ class TestingScript extends Component {
     return(
       <div className="testing-params">
         <Segment placeholder className="well">
-          <h1 className="testing-h1"> Write Partial Test Script </h1>
+          <h1 className="testing-h1"> Test Scripts: </h1>
           <div className= "params">
 
               <CodeMirror value={this.data.code} onChange={this.updateCode} options={options} />

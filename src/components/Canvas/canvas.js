@@ -126,8 +126,8 @@ class  Canvas extends Component {
         <div className= "canvas">
           <div className="img-holder">
             <Image src= {require('../../logo.png')}  size='small'/>
-
           </div>
+
 
           <Modal open={this.state.open}>
             <Modal.Header>Run Details</Modal.Header>

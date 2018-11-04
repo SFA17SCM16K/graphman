@@ -68,7 +68,7 @@ class RequestParams extends Component {
 
 
           <Segment placeholder className="well">
-            <h1 className="header-h1"> Request Params: {url} By {methods[method-1].text} </h1>
+            <h1 className="header-h1"> Request Params: </h1>
             <div className= "params">
               <Input
                   label='Key'
