@@ -98,7 +98,7 @@ export function setCode(params){
 
 export function cloudApi(params) {
   console.log(params)
-  const url = "http://localhost:4000/submit";
+  const url = "http://35.194.69.197:4000/submit";
 
   const fetchDatas = () => fetch(url, {
     method: "POST",

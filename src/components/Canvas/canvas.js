@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react'
+import { Button, Modal, Image,Header } from 'semantic-ui-react'
 import {connect} from 'react-redux';
 import RequestComponent from '../RequestComponent';
 import { addRequest }  from '../../actions/actions';
 import {focusComponent } from '../../actions/actions';
-import {cloudApi } from '../../actions/actions';
+import { cloudApi } from '../../actions/actions';
+import ReactJson from 'react-json-view'
 
 import { ArcherContainer } from 'react-archer';
 
@@ -33,7 +34,19 @@ function exportToJson(objectData: SomeObject) {
 
 class  Canvas extends Component {
 
-
+  constructor(props){
+    super(props);
+    this.state = {
+      "open" : false
+    }
+    this.model ={
+      "items" : "",
+      "scripts" : "",
+      "requests" : "",
+      "tests": "",
+      "obj" : {}
+    }
+  }
   handleItemClick = (e, { name }) => {
 
     this.setState({ activeItem: name });
@@ -69,7 +82,21 @@ class  Canvas extends Component {
       this.data.item.push(request.item);
       return 0;
     });
-    cloudApi({"postman" : this.data}).then( (data) => console.log(data));
+    cloudApi({"postman" : this.data}).then( (data) => {
+      if(data.success == false){
+        this.setState({open:true});
+
+      }else{
+
+        this.model.items = data.result.items;
+        this.model.scripts = data.result.scripts;
+        this.model.requests = data.result.requests;
+        this.model.tests = data.result.tests;
+        this.model.obj = data.result;
+
+        this.setState({open:true});
+      }
+    });
   }
 
   deleteFlow = () => {
@@ -84,7 +111,9 @@ class  Canvas extends Component {
     this.props.addRequest({});
   }
 
-
+  closeModel = () => {
+    this.setState({open:false});
+  }
   populateRequests = () => {
     return this.props.requestComponents.data.map( ( request, i )   => {
       return <RequestComponent key = {i} data = {request} reqId = {i} />;
@@ -93,7 +122,28 @@ class  Canvas extends Component {
   render() {
     return (
 
+
         <div className= "canvas">
+          <Modal open={this.state.open}>
+            <Modal.Header>Run Details</Modal.Header>
+            <Modal.Content>
+
+              <Modal.Description>
+                <Header>Select Workflow Summary Details</Header>
+                <Header> Script Details  : Success:{ this.model.scripts.total}   Failed: {this.model.scripts.failed} </Header>
+                <Header> Item Details    : Success:{ this.model.items.total}     Failed: {this.model.items.failed}</Header>
+                <Header> Request Details : Success:{ this.model.requests.total}  Failed: {this.model.requests.failed}</Header>
+                <Header> Test Details    : Success:{ this.model.tests.total}     Failed: {this.model.tests.failed} </Header>
+              </Modal.Description>
+              <Modal.Description>
+                <Header>Entire Summary Object</Header>
+                <ReactJson src={this.model.obj} />
+              </Modal.Description>
+
+
+            </Modal.Content>
+            <Button onClick={this.closeModel}> Close Test Results</Button>
+          </Modal>
           <div className="header">
             <Button onClick={this.addRequest} className="req">  Add Request  </Button>
             <Button onClick={this.handleItemClick} className="req">  Export the Workflow  </Button>
