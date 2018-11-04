@@ -9,4 +9,4 @@ notification:
   - karthic.rajakumar95@gmail.com
   - shamakashyap@gmail.com
 script:
--npm run build
+- npm run build
