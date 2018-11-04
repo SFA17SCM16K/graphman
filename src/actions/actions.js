@@ -55,7 +55,7 @@ export function setValue(params) {
 }
 
 export function hitApi(method, url, params={}) {
-    var url = new URL('http://'+url)
+    var url = new URL(url)
 
 
     var p = params.reduce(function(result, currentObject) {
@@ -90,7 +90,6 @@ export function setResponse(params) {
 }
 
 export function setCode(params){
-  console.log(params)
   return{
     type: SET_CODE,
     payload :  params
