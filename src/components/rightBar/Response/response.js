@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Segment,Input, Button } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 import {connect} from 'react-redux';
 import ReactJson from 'react-json-view'
 
@@ -7,7 +7,7 @@ import './response.css'
 
 class Response extends Component{
   render(){
-    const res = this.props.response.data.length !=0 ? this.props.response.data :   { "Waiting" : "For Response"};
+    const res = this.props.response.data.length !==0 ? this.props.response.data :   { "Waiting" : "For Response"};
     console.log(res);
 
 

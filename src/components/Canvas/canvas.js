@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Segment, Dropdown, Input, Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import {connect} from 'react-redux';
 import RequestComponent from '../RequestComponent';
 import { addRequest }  from '../../actions/actions';
 import {focusComponent } from '../../actions/actions';
-import { ArcherContainer, ArcherElement } from 'react-archer';
+import { ArcherContainer } from 'react-archer';
 
 import './canvas.css';
 
@@ -31,10 +31,7 @@ function exportToJson(objectData: SomeObject) {
 
 class  Canvas extends Component {
 
-  constructor(props){
-    super(props);
 
-  }
   handleItemClick = (e, { name }) => {
 
     this.setState({ activeItem: name });
@@ -49,7 +46,7 @@ class  Canvas extends Component {
 
     this.props.requestComponents.data.map( (request,i) => {
       this.data.item.push(request.item);
-
+      return 0;
     });
     console.log(this.data);
     exportToJson(this.data);

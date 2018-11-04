@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Segment, Dropdown, Input } from 'semantic-ui-react'
 import './requestComponent.css';
@@ -7,7 +6,7 @@ import './requestComponent.css';
 import { changeUrl} from '../../actions/actions.js';
 import { changeMethod} from '../../actions/actions.js';
 import { focusComponent} from '../../actions/actions.js';
-import { ArcherContainer, ArcherElement } from 'react-archer';
+import { ArcherElement } from 'react-archer';
 
 
 
@@ -105,7 +104,7 @@ class RequestComponent extends Component{
     const method = this.props.data.method;
     const url = this.props.data.url || this.data.url
 
-    if(this.props.focusReq.data.id == this.props.data.id){
+    if(this.props.focusReq.data.id === this.props.data.id){
       this.color = "red"
     }else{
       this.color=""
@@ -118,8 +117,8 @@ class RequestComponent extends Component{
           <ArcherElement
             id= {'id'+this.props.reqId}
             relations={[{
-              from: { anchor: `${parseInt(this.props.reqId) % 2 ==0 ? "right" : "bottom"}` , id:`${'id'+this.props.reqId}`},
-              to: { anchor: `${parseInt(this.props.reqId) % 2 ==0 ? "left" : "top"}`,id:`id${parseInt(this.props.reqId)+1}`},
+              from: { anchor: `${parseInt(this.props.reqId) % 2 ===0 ? "right" : "bottom"}` , id:`${'id'+this.props.reqId}`},
+              to: { anchor: `${parseInt(this.props.reqId) % 2 ===0 ? "left" : "top"}`,id:`id${parseInt(this.props.reqId)+1}`},
 
             }]}
           >
