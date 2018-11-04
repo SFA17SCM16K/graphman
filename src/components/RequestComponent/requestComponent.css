@@ -1,12 +1,14 @@
 .request-root{
 
-  margin-top:12px !important;
-  margin-right:12px !important;
-  maring-left:12px !important;
+  margin-top:80px !important;
+  margin-right:20px !important;
+  margin-left:20px !important;
+  margin-bottom: 20px !important;
   height:60px;
   width:360px;
   padding:10px;
   display:flex !important;
+  
 }
 
 .request-drop{
@@ -21,7 +23,6 @@
 }
 
 .request-url{
-  align-self: stretch;
 
   margin-left : 30px !important;
   width:200px;

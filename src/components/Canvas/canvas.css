@@ -4,19 +4,28 @@
   margin-right:0px;
   margin-left:0px;
   position: relative;
-
+  background-color: #dcdde1
 }
 .canvas-items{
-  height: 100%;
+
   width:100% !important;
   display:flex;
   flex-direction: row;
-  flex-wrap:wrap
+  flex-wrap:wrap;
+
 }
 .req{
   align-self: center;
+  color: white !important;
+  margin-top :10px !important;
+  margin-left:50px !important;
+  align-items: flex-end;
+  background-color: #353b48 !important;
 }
 .header{
   width:100%;
+  display:flex;
+  flex-direction: row;
+  align-content: space-around;
   height:50px;
 }

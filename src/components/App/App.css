@@ -1,8 +1,11 @@
 .App {
   text-align: center;
   height:100%;
+  background-color: #dcdde1 !important
 
-
+}
+.menu{
+  margin-bottom : 0px !important;
 }
 .content-area{
   display:flex;

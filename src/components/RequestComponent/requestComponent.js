@@ -7,7 +7,7 @@ import './requestComponent.css';
 import { changeUrl} from '../../actions/actions.js';
 import { changeMethod} from '../../actions/actions.js';
 import { focusComponent} from '../../actions/actions.js';
-
+import { ArcherContainer, ArcherElement } from 'react-archer';
 
 
 
@@ -24,15 +24,51 @@ class RequestComponent extends Component{
   constructor(props){
     super(props);
 
+
+
     this.data = {
       "id": this.props.reqId,
       "method" : '',
       "url" : '',
-      "values" : []
+      "values" : [],
+      "item":{
+        "name":this.props.reqId,
+        "event" : [
+          {
+            "listen" : "test",
+            "script" :{
+              "id": `test-1-${this.props.reqId}`,
+              "exec" : [``,
+                `postman.setNextRequest("${parseInt(this.props.reqId)+1}");`
+              ],
+              "type":"text/javascript"
+            }
+          }
+        ],
+        "request":{
+          "method" : "",
+          "url": {
+            "raw" : "",
+            "protocol" : "http",
+            "host": [],
+            "port": "",
+            "query":[]
+
+          },
+          "body":{
+            "mode" : "urlencoded",
+            "urlencoded" : []
+          }
+        },
+        "response":{}
+      }
     }
+
+
     this.state = {
       "color" : ""
     }
+
   }
 
   handleChange = (e, data) => {
@@ -40,12 +76,19 @@ class RequestComponent extends Component{
 
 
     this.data.method = value;
+    this.data.item.request["method"] = methods[value-1].text;
     this.props.changeMethod(this.data);
   }
 
   urlChange = (e,data) => {
     const { value } = data;
     this.data.url = value;
+    var port = value.split(":");
+    var host = port[0];
+    port = port[1];
+    this.data.item.request["url"]["host"][0] = host;
+    this.data.item.request["url"]["port"] = port;
+    this.data.item.request["url"]["raw"] = value;
 
     this.props.changeUrl(this.data);
 
@@ -72,6 +115,14 @@ class RequestComponent extends Component{
     return (
 
         <Segment color={this.color} raised className="request-root" onClick = {this.handleClick}>
+          <ArcherElement
+            id= {'id'+this.props.reqId}
+            relations={[{
+              from: { anchor: `${parseInt(this.props.reqId) % 2 ==0 ? "right" : "bottom"}` , id:`${'id'+this.props.reqId}`},
+              to: { anchor: `${parseInt(this.props.reqId) % 2 ==0 ? "left" : "top"}`,id:`id${parseInt(this.props.reqId)+1}`},
+
+            }]}
+          >
           <Dropdown
             options={methods}
             defaultValue = {method}
@@ -87,7 +138,9 @@ class RequestComponent extends Component{
             onChange = { this.urlChange}
             defaultValue  = { url}
           />
+        </ArcherElement>
         </Segment>
+
 
     )
   }

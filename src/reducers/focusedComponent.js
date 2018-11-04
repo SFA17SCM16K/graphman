@@ -32,7 +32,6 @@ export default (initialData) => (state = {
     case SET_VALUE:
       const value = action.payload.value
       let i_k = action.payload.id
-      console.log(value)
       return {
         ...state,
         values : state.data.values.map( (item, i ) => {

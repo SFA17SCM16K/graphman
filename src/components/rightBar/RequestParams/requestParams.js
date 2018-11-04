@@ -3,6 +3,11 @@ import { connect } from 'react-redux'
 import { Segment,Input, Button } from 'semantic-ui-react'
 import { setKey } from '../../../actions/actions'
 import { setValue } from '../../../actions/actions'
+import { hitApi } from '../../../actions/actions'
+import { setResponse } from '../../../actions/actions'
+
+
+
 
 
 import './requestParams.css';
@@ -27,6 +32,7 @@ class RequestParams extends Component {
         var data = {
           "id" : data.ip,
           "key": data.value,
+          "comp" : data.id
 
         }
         this.props.setKey(data);
@@ -35,10 +41,22 @@ class RequestParams extends Component {
         var data = {
           "id" : data.ip,
           "value": data.value,
+          "comp" : data.id
 
       }
       this.props.setValue(data);
     }
+  }
+
+  callAPI = () => {
+    console.log("api");
+    const {method, url,id} = this.props.focusReq.data;
+    const m = methods[method-1].text;
+    const u = url;
+    const params = this.props.focusReq.data.values;
+
+    hitApi(m,u,params).then( (op) => this.props.setResponse(op));
+
   }
   render() {
     const {method, url,id} = this.props.focusReq.data;
@@ -59,16 +77,15 @@ class RequestParams extends Component {
                   placeholder='Your Key'
                   className="req-param"
                   onChange = { this.paramChange}
-                  defaultValue  = { url}
                 />
               <Input
                   label='Value'
                   val='0'
+                  ip='0'
                   id= {id}
                   placeholder='Your value'
                   className="req-param"
                   onChange = { this.paramChange}
-                  defaultValue  = { url}
                 />
                 <Input
                     label='Key'
@@ -77,16 +94,15 @@ class RequestParams extends Component {
                     placeholder='Your Key'
                     className="req-param"
                     onChange = { this.paramChange}
-                    defaultValue  = { url}
                   />
                 <Input
                     label='Value'
                     placeholder='Your value'
                     val='1'
+                    ip='1'
                     id= {id}
                     className="req-param"
                     onChange = { this.paramChange}
-                    defaultValue  = { url}
                   />
                   <Input
                       label='Key'
@@ -95,19 +111,18 @@ class RequestParams extends Component {
                       placeholder='Your Key'
                       className="req-param"
                       onChange = { this.paramChange}
-                      defaultValue  = { url}
                     />
                   <Input
                       label='Value'
                       placeholder='Your value'
                       val='2'
+                      ip='2'
                       id= {id}
                       className="req-param"
                       onChange = { this.paramChange}
-                      defaultValue  = { url}
                     />
 
-                  <Button className="hit"> Hit API </Button>
+                  <Button className="hit" onClick={this.callAPI}> Hit API </Button>
             </div>
 
 
@@ -138,7 +153,8 @@ const mapStateToProps = ( state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setKey : (params) => dispatch(setKey(params)),
-    setValue : (params) => dispatch(setValue(params))
+    setValue : (params) => dispatch(setValue(params)),
+    setResponse: (params) => dispatch(setResponse(params))
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(RequestParams);

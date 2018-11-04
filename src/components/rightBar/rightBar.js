@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import RequestParams from './RequestParams'
+import RequestParams from './RequestParams';
+import Response from './Response';
+import TestScript from './testScript'
 import './rightBar.css'
 
 class rightBar extends Component {
@@ -8,6 +10,8 @@ class rightBar extends Component {
     return(
       <div className="right-root">
         <RequestParams />
+        <TestScript />
+        <Response />
       </div>
 
     )

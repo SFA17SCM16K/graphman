@@ -1,6 +1,7 @@
 .right-root{
   height:100% !important;
-  background-color: #34495e;
+  background-color: #353b48;
   width:40%;
   color:white;
+  overflow-y: scroll;
 }

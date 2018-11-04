@@ -7,6 +7,9 @@ export const CHANGE_METHOD = 'change_method'
 export const CHANGE_URL = 'change_url'
 export const SET_KEY = 'set_key'
 export const SET_VALUE = 'set_value'
+export const SET_RESPONSE = 'set_response'
+export const SET_CODE = 'set_code'
+
 
 
 
@@ -51,10 +54,24 @@ export function setValue(params) {
   }
 }
 
-export function hitApi(method, url, params) {
+export function hitApi(method, url, params={}) {
+    var url = new URL('http://'+url)
 
-    const fetchData = fetch(url, {
-      method: method, body: JSON.stringify(params), // data can be `string` or {object}!
+
+    var p = params.reduce(function(result, currentObject) {
+    for(var key in currentObject) {
+        if (currentObject.hasOwnProperty(key)) {
+            result[key] = currentObject[key];
+        }
+    }
+    return result;
+    }, {});
+
+
+    url.search = new URLSearchParams(p);
+
+    const fetchData = () => fetch(url, {
+      method: method,
       headers: {
         'Content-Type': 'application/json'
       }
@@ -69,5 +86,13 @@ export function setResponse(params) {
   return {
     type: SET_RESPONSE,
     payload : params
+  }
+}
+
+export function setCode(params){
+  console.log(params)
+  return{
+    type: SET_CODE,
+    payload :  params
   }
 }
