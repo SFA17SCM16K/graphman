@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RequestComponent from '../RequestComponent';
-import { Menu } from 'semantic-ui-react'
+import { Menu,Image } from 'semantic-ui-react'
 import Canvas from '../Canvas'
 import RightBar from '../rightBar';
 import {connect} from 'react-redux';
@@ -21,6 +21,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className= "content-area">
+          
           <Canvas />
           <RightBar />
         </div>

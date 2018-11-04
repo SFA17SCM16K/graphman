@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Segment, Dropdown, Input } from 'semantic-ui-react'
+import { Segment, Dropdown, Input, Image } from 'semantic-ui-react'
 import './requestComponent.css';
 
 import { changeUrl} from '../../actions/actions.js';
@@ -167,7 +167,7 @@ class RequestComponent extends Component{
           />
 
           <Input
-            label='http://'
+            label='URL'
             placeholder='enter your API url'
             className="request-url"
             onChange = { this.urlChange}

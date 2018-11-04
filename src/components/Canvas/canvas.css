@@ -14,6 +14,13 @@
   flex-wrap:wrap;
 
 }
+.img-holder{
+  width:100% !important;
+  background-color: white !important;
+}
+.image{
+
+}
 .req{
   align-self: center;
   color: white !important;
@@ -28,6 +35,7 @@
   flex-direction: row;
   align-content: space-around;
   height:50px;
+  background-color:  #f5f6fa  !important;
 }
 .req-big{
   align-self: center;
