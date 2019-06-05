@@ -150,7 +150,7 @@ class  Canvas extends Component {
             <Button onClick={this.closeModel}> Close Test Results</Button>
           </Modal>
           <div className="header">
-            <Button onClick={this.addRequest} className="req">  Add Request  </Button>
+            <Button onClick={this.addRequest} className="req">  Add Request No  </Button>
             <Button onClick={this.handleItemClick} className="req">  Export the Workflow  </Button>
             <Button onClick={this.deleteFlow} className="req">  Delete the WorkFlow  </Button>
             <Button size="big" onClick={this.cloudApi} className="req-big"> Run this workflow in our Cloud API  </Button>
